@@ -65,10 +65,10 @@ def cred_preprocessing():
     colnames = ['ESCT', 'NDEP', 'RENDA', 'TIPOR', 'VBEM', 'NPARC',
                 'VPARC', 'TEL', 'IDADE', 'RESMS', 'ENTRADA', 'CLASSE']
     # Leitura dos dados de treino
-    arquivo = './credtrain.txt'
+    arquivo = './experiments/credtrain.txt'
     data_train = pd.read_csv(arquivo, sep='\t', header=None, names=colnames)
     # Leitura dos dados de teste
-    arquivo = './credtest.txt'
+    arquivo = './experiments/credtest.txt'
     data_test = pd.read_csv(arquivo, sep='\t', header=None, names=colnames)
     # Aplicação no conjunto de treinamento
     data_train_new = pd.get_dummies(data=data_train,
@@ -179,7 +179,7 @@ if __name__ == "__main__":
         for k in range(len(hyperopt_methods)):
             hom = hyperopt_methods[k]
             dataframe = DataFrame()
-            filename = f"results/{algorithm.__name__}_{hom.__name__}_cred.csv"
+            filename = f"experiments/results/{algorithm.__name__}_{hom.__name__}_cred.csv"
             for _ in range(10):
                 dataframe = run_cred(data, algorithm, hom, k == 2, params, filename, dataframe)
 
