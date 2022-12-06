@@ -104,7 +104,7 @@ def run_cred(data, algorithm: BaseEstimator, hyperopt_method, is_hyperbrkga: boo
 
     # Hyperparameter Optimization
     if is_hyperbrkga:
-        hyper_opt = hyperopt_method(algorithm(), parameters, cv=5, data=X_train, target=y_train)
+        hyper_opt = hyperopt_method(algorithm(), parameters=parameters, cv=5, data=X_train, target=y_train)
     else:
         hyper_opt = hyperopt_method(algorithm(), parameters, cv=5)
 
