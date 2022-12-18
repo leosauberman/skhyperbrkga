@@ -181,6 +181,6 @@ if __name__ == "__main__":
             dataframe = DataFrame()
             filename = f"experiments/results/{algorithm.__name__}_{hom.__name__}_cred.csv"
             for _ in range(10):
-                dataframe = run_cred(data, algorithm, hom, k == 2, params, filename, dataframe)
+                dataframe = run_cred(data, algorithm, hom, k == 0, params, filename, dataframe)
 
             compute_mean_and_std(dataframe, filename)
