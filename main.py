@@ -121,10 +121,10 @@ def run_cred(data, algorithm: BaseEstimator, hyperopt_method, is_hyperbrkga: boo
 
 if __name__ == "__main__":
     algorithms = [
-        LogisticRegression,
-        DecisionTreeClassifier,
-        RandomForestClassifier,
-        KNeighborsClassifier,
+        # LogisticRegression,
+        # DecisionTreeClassifier,
+        # RandomForestClassifier,
+        # KNeighborsClassifier,
         XGBClassifier,
         MLPClassifier
     ]
@@ -169,7 +169,7 @@ if __name__ == "__main__":
         },
     }
 
-    hyperopt_methods = [GridSearchCV, RandomizedSearchCV, HyperBRKGASearchCV]
+    hyperopt_methods = [HyperBRKGASearchCV, GridSearchCV, RandomizedSearchCV]
 
     data = cred_preprocessing()
 
