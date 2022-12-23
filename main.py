@@ -2,14 +2,15 @@ import numpy as np
 import pandas as pd
 from pandas import DataFrame
 from sklearn.base import BaseEstimator
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.linear_model import LogisticRegression, Lasso, LinearRegression
+from sklearn.model_selection import train_test_split
 from sklearn.model_selection._search import BaseSearchCV, GridSearchCV, RandomizedSearchCV
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.neural_network import MLPClassifier
+from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
+from sklearn.neural_network import MLPClassifier, MLPRegressor
 from sklearn.preprocessing import StandardScaler
-from sklearn.tree import DecisionTreeClassifier
-from xgboost import XGBClassifier
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
+from xgboost import XGBClassifier, XGBRegressor
 
 from adaptee import HyperBRKGASearchCV
 
@@ -98,8 +99,26 @@ def cred_preprocessing():
     return X_train, y_train, X_test, y_test
 
 
-def run_cred(data, algorithm: BaseEstimator, hyperopt_method, is_hyperbrkga: bool, parameters: dict, filename: str,
-             df: DataFrame):
+def diamond_preprocessing():
+    df_diamonds = pd.read_csv("./experiments/diamonds.csv")
+    df_diamonds = df_diamonds.drop(["Unnamed: 0"], axis=1)
+    df_diamonds['cut'].replace({'Fair': 1, 'Good': 2, 'Very Good': 3, 'Premium': 4, 'Ideal': 5}, inplace=True)
+    df_diamonds['color'].replace({'J': 1, 'I': 2, 'H': 3, 'G': 4, 'F': 5, 'E': 6, 'D': 7}, inplace=True)
+    df_diamonds['clarity'].replace({'I1': 1, 'SI2': 2, 'SI1': 3, 'VS2': 4, 'VS1': 5, 'VVS2': 6, 'VVS1': 7, 'IF': 8},
+                                   inplace=True)
+    # Divisão entre treino e teste
+    X = df_diamonds.drop(['price'], 1)
+    y = df_diamonds['price']
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(X_train)
+    X_test = scaler.transform(X_test)
+
+    return X_train, y_train, X_test, y_test
+
+
+def run(data, algorithm: BaseEstimator, hyperopt_method, is_hyperbrkga: bool, parameters: dict, filename: str,
+        df: DataFrame):
     X_train, y_train, X_test, y_test = data
 
     # Hyperparameter Optimization
@@ -120,16 +139,16 @@ def run_cred(data, algorithm: BaseEstimator, hyperopt_method, is_hyperbrkga: boo
 
 
 if __name__ == "__main__":
-    algorithms = [
-        # LogisticRegression,
-        # DecisionTreeClassifier,
-        # RandomForestClassifier,
-        # KNeighborsClassifier,
+    classifier_algorithms = [
+        LogisticRegression,
+        DecisionTreeClassifier,
+        RandomForestClassifier,
+        KNeighborsClassifier,
         XGBClassifier,
         MLPClassifier
     ]
 
-    hyperparams = {
+    classifier_hyperparams = {
         "LogisticRegression": {
             'penalty': ('l1', 'l2', 'elasticnet', 'none'),
             'solver': ('newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'),
@@ -169,18 +188,85 @@ if __name__ == "__main__":
         },
     }
 
+    regression_algorithms = [
+        LinearRegression,
+        Lasso,
+        DecisionTreeRegressor,
+        RandomForestRegressor,
+        KNeighborsRegressor,
+        XGBRegressor,
+        MLPRegressor,
+    ]
+
+    regression_hyperparams = {
+        "LinearRegression": {
+            'fit_intercept': [True, False],
+            'positive': [True, False]
+        },
+        "Lasso": {
+            'alpha': np.linspace(0.0, 10.0),
+            'fit_intercept': [True, False],
+            'selection': ('cyclic', 'random')
+        },
+        "DecisionTreeRegressor": {
+            'criterion': ('squared_error', 'friedman_mse', 'absolute_error', 'poisson'),
+            'splitter': ('best', 'random'),
+            'max_depth': np.arange(0, 20),
+            'min_samples_split': np.arange(0, 20),
+            'min_samples_leaf': np.arange(0, 20)
+        },
+        "RandomForestRegressor": {
+            'criterion': ('squared_error', 'friedman_mse', 'absolute_error', 'poisson'),
+            'max_depth': np.arange(0, 20),
+            'min_samples_split': np.arange(0, 20),
+            'min_samples_leaf': np.arange(0, 20)
+        },
+        "KNeighborsRegressor": {
+            'n_neighbors': np.arange(1, 30),
+            'leaf_size': np.arange(10, 50),
+            'algorithm': ('auto', 'ball_tree', 'kd_tree', 'brute'),
+            'p': [1, 2]
+        },
+        "XGBRegressor": {
+            'max_depth': np.arange(0, 30),
+            'max_leaves': np.arange(0, 30),
+            'learning_rate': [0.001, 0.01, 0.125, 0.25, 0.5, 1],
+            'n_estimators': np.arange(1, 10000, 500)
+        },
+        "MLPRegressor": {
+            'hidden_layer_sizes': [(10, 30, 10), (20,)],
+            'activation': ['tanh', 'relu'],
+            'solver': ['sgd', 'adam'],
+            'alpha': np.linspace(0.0001, 0.05, 20),
+            'learning_rate': ['constant', 'adaptive']
+        },
+    }
+
     hyperopt_methods = [HyperBRKGASearchCV, GridSearchCV, RandomizedSearchCV]
 
-    data = cred_preprocessing()
+    # data = cred_preprocessing()
+    data = diamond_preprocessing()
 
-    for i in range(len(algorithms)):
-        algorithm = algorithms[i]
-        params = hyperparams[algorithm.__name__]
+    # for i in range(len(classifier_algorithms)):
+    #     algorithm = classifier_algorithms[i]
+    #     params = classifier_hyperparams[algorithm.__name__]
+    #     for k in range(len(hyperopt_methods)):
+    #         hom = hyperopt_methods[k]
+    #         dataframe = DataFrame()
+    #         filename = f"experiments/results/{algorithm.__name__}_{hom.__name__}_cred.csv"
+    #         for _ in range(10):
+    #             dataframe = run(data, algorithm, hom, k == 0, params, filename, dataframe)
+    #
+    #         compute_mean_and_std(dataframe, filename)
+
+    for i in range(len(regression_algorithms)):
+        algorithm = regression_algorithms[i]
+        params = regression_hyperparams[algorithm.__name__]
         for k in range(len(hyperopt_methods)):
             hom = hyperopt_methods[k]
             dataframe = DataFrame()
-            filename = f"experiments/results/{algorithm.__name__}_{hom.__name__}_cred.csv"
-            for _ in range(10):
-                dataframe = run_cred(data, algorithm, hom, k == 0, params, filename, dataframe)
+            filename = f"experiments/results/{algorithm.__name__}_{hom.__name__}_diamond.csv"
+            for _ in range(5):
+                dataframe = run(data, algorithm, hom, k == 0, params, filename, dataframe)
 
             compute_mean_and_std(dataframe, filename)

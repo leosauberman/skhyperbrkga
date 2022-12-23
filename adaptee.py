@@ -73,6 +73,7 @@ class Decoder:
         except ValueError:
             return 0.0
 
+        # Adicionar o parâmetro scoring para que siga fielmente o SKLearn
         return cross_val_score(estimator_clone, self._X, self._y, cv=self._cv).mean()
 
 
