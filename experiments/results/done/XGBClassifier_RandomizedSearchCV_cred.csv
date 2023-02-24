@@ -1,0 +1,8 @@
+,Score,Time,Param
+0,0.898,24.107353448867798,"{'max_leaves': 16, 'max_depth': 8, 'learning_rate': 0.01, 'grow_policy': 'depthwise'}"
+1,0.898,53.02176260948181,"{'max_leaves': 28, 'max_depth': 8, 'learning_rate': 0.01, 'grow_policy': 'depthwise'}"
+2,0.9046666666666667,58.48606753349303,"{'max_leaves': 24, 'max_depth': 4, 'learning_rate': 0.125, 'grow_policy': 'depthwise'}"
+3,0.8933333333333333,47.70178818702698,"{'max_leaves': 24, 'max_depth': 16, 'learning_rate': 0.01, 'grow_policy': 'depthwise'}"
+4,0.9046666666666667,13.184896707534788,"{'max_leaves': 20, 'max_depth': 4, 'learning_rate': 0.01, 'grow_policy': 'lossguide'}"
+0,Média: 0.8997333333333334,Média: 39.30037369728088,
+1,Desvio Padrão: 0.004889898885571301,,

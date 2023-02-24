@@ -1,0 +1,8 @@
+,Score,Time,Param
+0,0.8939999999999999,160.25123476982117,"{'activation': 'tanh', 'alpha': 0.0001, 'learning_rate': 'constant', 'solver': 'sgd'}"
+1,0.8933333333333333,164.2308783531189,"{'activation': 'tanh', 'alpha': 0.0001, 'learning_rate': 'adaptive', 'solver': 'sgd'}"
+2,0.8946666666666667,161.20356059074402,"{'activation': 'relu', 'alpha': 0.05, 'learning_rate': 'adaptive', 'solver': 'sgd'}"
+3,0.8933333333333333,168.51158690452579,"{'activation': 'tanh', 'alpha': 0.0001, 'learning_rate': 'constant', 'solver': 'sgd'}"
+4,0.8933333333333333,160.79312252998352,"{'activation': 'tanh', 'alpha': 0.05, 'learning_rate': 'adaptive', 'solver': 'adam'}"
+0,Média: 0.8937333333333333,Média: 162.99807662963866,
+1,Desvio Padrão: 0.0005962847939999652,,

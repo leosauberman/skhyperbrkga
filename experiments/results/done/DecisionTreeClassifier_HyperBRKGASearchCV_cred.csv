@@ -1,0 +1,13 @@
+,Score,Time,Param
+0,0.8966666666666667,2.520492,"{'criterion': 'gini', 'splitter': 'best', 'max_depth': 7, 'min_samples_split': 15, 'min_samples_leaf': 13}"
+1,0.8993333333333332,2.205607,"{'criterion': 'gini', 'splitter': 'best', 'max_depth': 2, 'min_samples_split': 18, 'min_samples_leaf': 15}"
+2,0.8933333333333333,2.801868,"{'criterion': 'entropy', 'splitter': 'best', 'max_depth': 10, 'min_samples_split': 13, 'min_samples_leaf': 17}"
+3,0.9040000000000001,2.225749,"{'criterion': 'gini', 'splitter': 'best', 'max_depth': 3, 'min_samples_split': 3, 'min_samples_leaf': 6}"
+4,0.8953333333333333,2.274472,"{'criterion': 'gini', 'splitter': 'best', 'max_depth': 47, 'min_samples_split': 18, 'min_samples_leaf': 18}"
+5,0.8993333333333332,2.328127,"{'criterion': 'gini', 'splitter': 'best', 'max_depth': 2, 'min_samples_split': 8, 'min_samples_leaf': 18}"
+6,0.8993333333333332,2.067626,"{'criterion': 'gini', 'splitter': 'best', 'max_depth': 3, 'min_samples_split': 2, 'min_samples_leaf': 19}"
+7,0.9,2.346323,"{'criterion': 'entropy', 'splitter': 'best', 'max_depth': 5, 'min_samples_split': 2, 'min_samples_leaf': 2}"
+8,0.8953333333333333,1.935079,"{'criterion': 'gini', 'splitter': 'best', 'max_depth': 56, 'min_samples_split': 3, 'min_samples_leaf': 17}"
+9,0.8993333333333332,1.674519,"{'criterion': 'gini', 'splitter': 'best', 'max_depth': 6, 'min_samples_split': 17, 'min_samples_leaf': 9}"
+10,Média: 0.8981999999999999,Média: 2.2379862,
+11,Desvio Padrão: 0.00306392792359542,,

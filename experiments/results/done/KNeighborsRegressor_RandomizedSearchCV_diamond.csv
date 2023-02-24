@@ -1,0 +1,7 @@
+,Score,Time,Param
+0,0.9703856745907888,54.38537788391115,"{'p': 1, 'n_neighbors': 11, 'leaf_size': 25, 'algorithm': 'brute'}"
+1,0.970595450574705,51.96317338943483,"{'p': 1, 'n_neighbors': 6, 'leaf_size': 30, 'algorithm': 'kd_tree'}"
+2,0.970595450574705,91.82073450088501,"{'p': 1, 'n_neighbors': 6, 'leaf_size': 30, 'algorithm': 'auto'}"
+3,0.9705954144383098,104.3358108997345,"{'p': 1, 'n_neighbors': 6, 'leaf_size': 25, 'algorithm': 'brute'}"
+4,Média: 0.9705429975446271,Média: 75.62627416849136,
+5,Desvio Padrão: 0.00010488197060892962,,

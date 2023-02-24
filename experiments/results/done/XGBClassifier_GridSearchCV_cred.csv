@@ -1,0 +1,8 @@
+,Score,Time,Param
+0,0.906,2152.847222328186,"{'grow_policy': 'depthwise', 'learning_rate': 0.001, 'max_depth': 4, 'max_leaves': 0}"
+1,0.906,2529.2843730449677,"{'grow_policy': 'depthwise', 'learning_rate': 0.001, 'max_depth': 4, 'max_leaves': 0}"
+2,0.906,3023.6499705314636,"{'grow_policy': 'depthwise', 'learning_rate': 0.001, 'max_depth': 4, 'max_leaves': 0}"
+3,0.906,2535.619322538376,"{'grow_policy': 'depthwise', 'learning_rate': 0.001, 'max_depth': 4, 'max_leaves': 0}"
+4,0.906,2707.475366592407,"{'grow_policy': 'depthwise', 'learning_rate': 0.001, 'max_depth': 4, 'max_leaves': 0}"
+0,Média: 0.906,Média: 2589.77525100708,
+1,Desvio Padrão: 0.0,,

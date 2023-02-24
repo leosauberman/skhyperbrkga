@@ -1,0 +1,8 @@
+0,0.9693071541986995,42.66275715827941,"{'splitter': 'random', 'min_samples_split': 8, 'min_samples_leaf': 12, 'max_depth': 12, 'criterion': 'absolute_error'}"
+1,0.9733792340634917,83.62294769287111,"{'splitter': 'random', 'min_samples_split': 8, 'min_samples_leaf': 4, 'max_depth': 16, 'criterion': 'poisson'}"
+2,0.9754865870354177,1.0568637847900388,"{'splitter': 'best', 'min_samples_split': 16, 'min_samples_leaf': 12, 'max_depth': 16, 'criterion': 'poisson'}"
+3,0.9754211056582095,75.18973231315613,"{'splitter': 'best', 'min_samples_split': 8, 'min_samples_leaf': 12, 'max_depth': 12, 'criterion': 'friedman_mse'}"
+4,0.9733520056873074,228.61218857765198,"{'splitter': 'best', 'min_samples_split': 8, 'min_samples_leaf': 16, 'max_depth': 16, 'criterion': 'absolute_error'}"
+,Score,Time,Param
+0,Média: 0.9733892173286252,Média: 86.22889790534973,
+1,Desvio Padrão: 0.00250959427195925,,

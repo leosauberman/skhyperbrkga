@@ -1,0 +1,8 @@
+,Score,Time,Param
+,Score,Time,Param
+0,0.9705958306151844,37037.178117990494,"{'algorithm': 'ball_tree', 'leaf_size': 35, 'n_neighbors': 6, 'p': 1}"
+1,0.9705958306151844,4517.7471575737,"{'algorithm': 'ball_tree', 'leaf_size': 35, 'n_neighbors': 6, 'p': 1}"
+2,0.9705958306151844,4105.045511245727,"{'algorithm': 'ball_tree', 'leaf_size': 35, 'n_neighbors': 6, 'p': 1}"
+3,0.9705958306151844,4198.853593826295,"{'algorithm': 'ball_tree', 'leaf_size': 35, 'n_neighbors': 6, 'p': 1}"
+4,Média: 0.9705958306151844,Média: 12464.706095159054,
+5,Desvio Padrão: 0.0,,
