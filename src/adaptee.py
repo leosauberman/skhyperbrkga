@@ -3,11 +3,11 @@ import random
 from datetime import datetime
 
 import numpy as np
-from sklearn import clone, svm, datasets
+from sklearn import clone
 from sklearn.base import is_classifier
 from sklearn.metrics import check_scoring
 from sklearn.metrics._scorer import _check_multimetric_scoring
-from sklearn.model_selection import check_cv, train_test_split
+from sklearn.model_selection import check_cv
 from sklearn.model_selection._search import BaseSearchCV, ParameterGrid
 from sklearn.model_selection._validation import cross_val_score
 from sklearn.utils import indexable
@@ -197,22 +197,3 @@ class HyperBRKGASearchCV(BaseSearchCV):
 
     def _run_search(self, evaluate_candidates):
         evaluate_candidates(ParameterGrid(self._parameters))
-
-
-if __name__ == '__main__':
-    irisX, irisY = datasets.load_iris(return_X_y=True)
-    X_train, X_test, y_train, y_test = train_test_split(irisX, irisY, test_size=0.5, random_state=0)
-
-    parameters = {'kernel': ('linear', 'rbf'), 'C': [1, 10]}
-    svc = svm.SVC()
-    clf = HyperBRKGASearchCV(svc, parameters=parameters, data=X_train, target=y_train)
-
-    print("# Otimizando os hiperparâmetros para precisão\n")
-
-    clf.fit(X_train, y_train)
-
-    print("Melhor combinação de parâmetros encontrados no conjunto de treino:\n")
-    print(clf.cv_results_['best_param_decoded'])
-    print()
-    print("Scores do HyperBRKGA no conjunto de treino:\n")
-    print(clf.cv_results_)

@@ -1,29 +1,28 @@
 # HyperBKRGA
 
+## Setting up the Environment 
 
-## Ambiente de desenvolvimento
+To run any code in this repository, it is necessary to follow these steps:
 
-Para executar qualquer código nesse repositório é necessário antes seguir este passo a passo:
+- Create and activate a virtual environment:
 
-- Criar um venv e ativá-lo:
 ```bash
 $ python -m venv venv
 $ venv/Scripts/activate
 ```
-- Instalar as dependências contidas em `requirements.txt`
+
+- Install the dependencies contained in `requirements.txt`
 ```bash
 pip install -r requirements.txt
 ```
 
-## Exemplo básico
-
-Com o ambiente preparado é possível rodar o exemplo mais básico da seguinte forma:
+## Basic Example
+With the environment set up, it is possible to run the simplest example as follows:
 
 ```bash
-$ py ./adaptee.py
+$ py ./src/examples/basic-example.py
 ```
 
-## Experimentos
-
-Para reproduzir os experimentos realizados no trabalho rode o arquivo ``main.py``. 
-Note que é um programa que toma muito tempo de execução. 
+## Experiments
+To reproduce the experiments carried out in this work, run the `src/main.py` file.
+Note that it is a time-consuming program.
