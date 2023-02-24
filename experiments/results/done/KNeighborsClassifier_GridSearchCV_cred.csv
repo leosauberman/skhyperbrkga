@@ -1,0 +1,13 @@
+,Score,Time,Param
+0,0.866,3610.7138698101044,"{'algorithm': 'auto', 'leaf_size': 1, 'n_neighbors': 19, 'p': 1}"
+1,0.866,3637.6052553653717,"{'algorithm': 'auto', 'leaf_size': 1, 'n_neighbors': 19, 'p': 1}"
+2,0.866,3612.423851966858,"{'algorithm': 'auto', 'leaf_size': 1, 'n_neighbors': 19, 'p': 1}"
+3,0.866,3608.5872733592987,"{'algorithm': 'auto', 'leaf_size': 1, 'n_neighbors': 19, 'p': 1}"
+4,0.866,3631.6365013122563,"{'algorithm': 'auto', 'leaf_size': 1, 'n_neighbors': 19, 'p': 1}"
+5,0.866,3652.5020968914027,"{'algorithm': 'auto', 'leaf_size': 1, 'n_neighbors': 19, 'p': 1}"
+6,0.866,3677.1786162853246,"{'algorithm': 'auto', 'leaf_size': 1, 'n_neighbors': 19, 'p': 1}"
+7,0.866,3680.417411088944,"{'algorithm': 'auto', 'leaf_size': 1, 'n_neighbors': 19, 'p': 1}"
+8,0.866,3662.7968459129333,"{'algorithm': 'auto', 'leaf_size': 1, 'n_neighbors': 19, 'p': 1}"
+9,0.866,3684.2570176124573,"{'algorithm': 'auto', 'leaf_size': 1, 'n_neighbors': 19, 'p': 1}"
+10,Média: 0.866,Média: 3645.811873960495,
+11,Desvio Padrão: 0.0,,

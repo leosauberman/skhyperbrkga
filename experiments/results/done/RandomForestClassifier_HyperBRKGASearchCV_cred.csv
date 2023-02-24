@@ -1,0 +1,13 @@
+,Score,Time,Param
+0,0.9073333333333332,66.860167,"{'criterion': 'gini', 'max_depth': 41, 'min_samples_split': 12, 'min_samples_leaf': 5}"
+1,0.9073333333333334,66.458519,"{'criterion': 'entropy', 'max_depth': 37, 'min_samples_split': 3, 'min_samples_leaf': 11}"
+2,0.9106666666666665,68.569047,"{'criterion': 'entropy', 'max_depth': 13, 'min_samples_split': 12, 'min_samples_leaf': 1}"
+3,0.9086666666666666,69.212592,"{'criterion': 'log_loss', 'max_depth': 9, 'min_samples_split': 8, 'min_samples_leaf': 1}"
+4,0.9106666666666665,69.500128,"{'criterion': 'entropy', 'max_depth': 14, 'min_samples_split': 15, 'min_samples_leaf': 2}"
+5,0.9093333333333333,70.262538,"{'criterion': 'log_loss', 'max_depth': 58, 'min_samples_split': 14, 'min_samples_leaf': 4}"
+6,0.9093333333333333,67.474644,"{'criterion': 'entropy', 'max_depth': 61, 'min_samples_split': 14, 'min_samples_leaf': 2}"
+7,0.9093333333333333,64.132931,"{'criterion': 'entropy', 'max_depth': 48, 'min_samples_split': 15, 'min_samples_leaf': 1}"
+8,0.9093333333333333,67.0619,"{'criterion': 'gini', 'max_depth': 53, 'min_samples_split': 16, 'min_samples_leaf': 3}"
+9,0.9073333333333334,69.276292,"{'criterion': 'entropy', 'max_depth': 53, 'min_samples_split': 11, 'min_samples_leaf': 3}"
+10,Média: 0.9089333333333333,Média: 67.8808758,
+11,Desvio Padrão: 0.001264911064067293,,

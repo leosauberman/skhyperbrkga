@@ -1,0 +1,13 @@
+,Score,Time,Param
+0,0.8626666666666667,43.011524,"{'n_neighbors': 26, 'leaf_size': 15, 'algorithm': 'auto', 'p': 1.0113843061483938}"
+1,0.8646666666666668,37.865972,"{'n_neighbors': 19, 'leaf_size': 24, 'algorithm': 'ball_tree', 'p': 1.025421135749125}"
+2,0.8633333333333333,34.834882,"{'n_neighbors': 18, 'leaf_size': 10, 'algorithm': 'ball_tree', 'p': 1.0493388828417318}"
+3,0.8620000000000001,36.673667,"{'n_neighbors': 25, 'leaf_size': 38, 'algorithm': 'ball_tree', 'p': 1.020816906311743}"
+4,0.8620000000000001,36.219749,"{'n_neighbors': 19, 'leaf_size': 42, 'algorithm': 'ball_tree', 'p': 1.1351636411540478}"
+5,0.8653333333333333,37.011168,"{'n_neighbors': 18, 'leaf_size': 6, 'algorithm': 'kd_tree', 'p': 1.0016284999030591}"
+6,0.8619999999999999,34.270421,"{'n_neighbors': 22, 'leaf_size': 18, 'algorithm': 'auto', 'p': 1.0923053386837416}"
+7,0.8640000000000001,37.692587,"{'n_neighbors': 13, 'leaf_size': 12, 'algorithm': 'ball_tree', 'p': 1.179595270551959}"
+8,0.8666666666666666,36.216765,"{'n_neighbors': 23, 'leaf_size': 24, 'algorithm': 'ball_tree', 'p': 1.0276266814003192}"
+9,0.8646666666666668,34.825021,"{'n_neighbors': 19, 'leaf_size': 3, 'algorithm': 'auto', 'p': 1.0185197221039444}"
+10,Média: 0.8637333333333335,Média: 36.8621756,
+11,Desvio Padrão: 0.0016086187618536646,,

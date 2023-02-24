@@ -1,32 +1,23 @@
 import copy
 import random
-import time
-from collections import defaultdict
 from datetime import datetime
-from itertools import product
 
-import numpy
 import numpy as np
-from joblib import Parallel
+from sklearn import clone, svm, datasets
+from sklearn.base import is_classifier
+from sklearn.metrics import check_scoring
+from sklearn.metrics._scorer import _check_multimetric_scoring
+from sklearn.model_selection import check_cv, train_test_split
+from sklearn.model_selection._search import BaseSearchCV, ParameterGrid
+from sklearn.model_selection._validation import cross_val_score
+from sklearn.utils import indexable
+from sklearn.utils.validation import _check_fit_params
 
 from hbrkga.brkga_mp_ipr.algorithm import BrkgaMpIpr
 from hbrkga.brkga_mp_ipr.enums import Sense
 from hbrkga.brkga_mp_ipr.types import BaseChromosome
 from hbrkga.brkga_mp_ipr.types_io import load_configuration
 from hbrkga.exploitation_method_BO_only_elites import BayesianOptimizerElites
-from sklearn import clone, svm, datasets
-from sklearn.base import is_classifier
-from sklearn.datasets import make_classification
-from sklearn.metrics import check_scoring
-from sklearn.metrics._scorer import _check_multimetric_scoring
-from sklearn.model_selection import check_cv, train_test_split
-from sklearn.model_selection._search import BaseSearchCV, ParameterGrid, GridSearchCV
-from sklearn.model_selection._validation import _fit_and_score, _warn_or_raise_about_fit_failures, _insert_error_scores, \
-    cross_val_score
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.utils import indexable
-from sklearn.utils.fixes import delayed
-from sklearn.utils.validation import _check_fit_params
 
 
 class Decoder:
@@ -208,72 +199,20 @@ class HyperBRKGASearchCV(BaseSearchCV):
         evaluate_candidates(ParameterGrid(self._parameters))
 
 
-"""
-# Exemplo 1
 if __name__ == '__main__':
-    iris = datasets.load_iris()
-    params = {'C': [1, 10], 'kernel': ['linear', 'poly', 'rbf', 'sigmoid', 'precomputed']}
+    irisX, irisY = datasets.load_iris(return_X_y=True)
+    X_train, X_test, y_train, y_test = train_test_split(irisX, irisY, test_size=0.5, random_state=0)
 
+    parameters = {'kernel': ('linear', 'rbf'), 'C': [1, 10]}
     svc = svm.SVC()
+    clf = HyperBRKGASearchCV(svc, parameters=parameters, data=X_train, target=y_train)
 
-    clf = HyperBRKGASearchCV(svc, parameters=params, data=iris.data, target=iris.target, verbose=3)
+    print("# Otimizando os hiperparâmetros para precisão\n")
 
-    clf.fit(iris.data, iris.target)
+    clf.fit(X_train, y_train)
+
+    print("Melhor combinação de parâmetros encontrados no conjunto de treino:\n")
+    print(clf.cv_results_['best_param_decoded'])
+    print()
+    print("Scores do HyperBRKGA no conjunto de treino:\n")
     print(clf.cv_results_)
-"""
-
-# Exemplo 2
-if __name__ == '__main__':
-    param_grid = {
-        'max_depth': [2, 4, 8, 16, 32, 64],
-        'min_samples_leaf': [2, 4, 8, 16],
-        'criterion': ['gini', 'entropy', 'log_loss']
-    }
-
-    tree = DecisionTreeClassifier()
-    # treeHBRKGA = DecisionTreeClassifier(criterion='entropy', max_depth=64, min_samples_leaf=2)
-    # treeGS = DecisionTreeClassifier(criterion='gini', max_depth=4, min_samples_leaf=4)
-    iris = datasets.load_iris()
-
-    # hyperbrkga = HyperBRKGASearchCV(tree, parameters=param_grid, cv=10, scoring='accuracy',
-    #                                 data=iris.data, target=iris.target, refit=True, verbose=3)
-    # hyperbrkga.fit(iris.data, iris.target)
-    # print('HyperBRKGA')
-    # print(hyperbrkga.cv_results_)
-    # print('--------------------------------------------\n')
-    #
-    grid = GridSearchCV(tree, param_grid)
-    grid.fit(iris.data, iris.target)
-    print('GridSearch')
-    print(grid.best_params_, grid.best_score_)
-    mean_fit_time = grid.cv_results_['mean_fit_time']
-    mean_score_time = grid.cv_results_['mean_score_time']
-    n_splits = grid.n_splits_  # number of splits of training data
-    import pandas as pd
-    n_iter = pd.DataFrame(grid.cv_results_).shape[0]  # Iterations per split
-
-    print(np.mean(mean_fit_time + mean_score_time) * n_splits * n_iter)
-
-    # X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, test_size=0.2, random_state=1, stratify=iris.target)
-    #
-    # treeHBRKGA.fit(X_train, y_train)
-    # treeGS.fit(X_train, y_train)
-    #
-    # print(treeHBRKGA.score(X_test, y_test))
-    # print(treeGS.score(X_test, y_test))
-
-
-
-"""
-HyperBRKGA
-'best_param_decoded': 
-{'criterion': 'entropy', 'max_depth': 64, 'min_samples_leaf': 2},
-'best_param_score': 0.98, 
-'total_time': datetime.timedelta(seconds=1, microseconds=725785)}
-
-Grid Search
-{'criterion': 'gini', 'max_depth': 4, 'min_samples_leaf': 4}
-
-"""
-
-

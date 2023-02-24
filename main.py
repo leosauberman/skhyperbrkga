@@ -40,7 +40,7 @@ def get_metrics(filename: str, hyperopt_method, is_hyperbrkga: bool, df: DataFra
     }
 
     df = df.append(row, ignore_index=True)
-    return df
+    return df, row
 
 
 def compute_mean_and_std(df, filename):
@@ -55,10 +55,11 @@ def compute_mean_and_std(df, filename):
 
     std = {'Score': f'Desvio Padrão: {df["Score"].std()}'}
 
-    df = df.append(means, ignore_index=True)
-    df = df.append(std, ignore_index=True)
+    new_df = DataFrame()
+    new_df = new_df.append(means, ignore_index=True)
+    new_df = new_df.append(std, ignore_index=True)
 
-    df.to_csv(filename, mode='a')
+    new_df.to_csv(filename, mode='a')
 
 
 def cred_preprocessing():
@@ -127,15 +128,9 @@ def run(data, algorithm: BaseEstimator, hyperopt_method, is_hyperbrkga: bool, pa
     else:
         hyper_opt = hyperopt_method(algorithm(), parameters, cv=5)
 
-    # print(type(hyperopt_method), type(hyper_opt))
     hyper_opt.fit(X_train, y_train)
 
     return get_metrics(filename, hyper_opt, is_hyperbrkga, df)
-
-    # algorithm.fit(X_train, y_train)
-    # target_names = ['0', '1']
-    # y_pred = algorithm.predict(X_test)
-    # print(classification_report(y_test, y_pred, target_names=target_names))
 
 
 if __name__ == "__main__":
@@ -146,6 +141,14 @@ if __name__ == "__main__":
         KNeighborsClassifier,
         XGBClassifier,
         MLPClassifier
+    ]
+    regression_algorithms = [
+        LinearRegression,
+        Lasso,
+        DecisionTreeRegressor,
+        RandomForestRegressor,
+        XGBRegressor,
+        MLPRegressor,
     ]
 
     classifier_hyperparams = {
@@ -188,16 +191,6 @@ if __name__ == "__main__":
         },
     }
 
-    regression_algorithms = [
-        LinearRegression,
-        Lasso,
-        DecisionTreeRegressor,
-        RandomForestRegressor,
-        KNeighborsRegressor,
-        XGBRegressor,
-        MLPRegressor,
-    ]
-
     regression_hyperparams = {
         "LinearRegression": {
             'fit_intercept': [True, False],
@@ -221,12 +214,6 @@ if __name__ == "__main__":
             'min_samples_split': np.arange(0, 20),
             'min_samples_leaf': np.arange(0, 20)
         },
-        "KNeighborsRegressor": {
-            'n_neighbors': np.arange(1, 30),
-            'leaf_size': np.arange(10, 50),
-            'algorithm': ('auto', 'ball_tree', 'kd_tree', 'brute'),
-            'p': [1, 2]
-        },
         "XGBRegressor": {
             'max_depth': np.arange(0, 30),
             'max_leaves': np.arange(0, 30),
@@ -244,29 +231,43 @@ if __name__ == "__main__":
 
     hyperopt_methods = [HyperBRKGASearchCV, GridSearchCV, RandomizedSearchCV]
 
-    # data = cred_preprocessing()
-    data = diamond_preprocessing()
+    data_cred = cred_preprocessing()
+    data_diamond = diamond_preprocessing()
 
-    # for i in range(len(classifier_algorithms)):
-    #     algorithm = classifier_algorithms[i]
-    #     params = classifier_hyperparams[algorithm.__name__]
-    #     for k in range(len(hyperopt_methods)):
-    #         hom = hyperopt_methods[k]
-    #         dataframe = DataFrame()
-    #         filename = f"experiments/results/{algorithm.__name__}_{hom.__name__}_cred.csv"
-    #         for _ in range(10):
-    #             dataframe = run(data, algorithm, hom, k == 0, params, filename, dataframe)
-    #
-    #         compute_mean_and_std(dataframe, filename)
+    i = 0
 
-    for i in range(len(regression_algorithms)):
-        algorithm = regression_algorithms[i]
+    while i < len(classifier_algorithms):
+        algorithm = classifier_algorithms[i]
+        params = classifier_hyperparams[algorithm.__name__]
+        for k in range(len(hyperopt_methods)):
+            hom = hyperopt_methods[k]
+            dataframe = DataFrame()
+            filename = f"experiments/results/{algorithm.__name__}_{hom.__name__}_cred.csv"
+            file = open(filename, 'a')
+
+            for x in range(10):
+                dataframe, metrics = run(data_cred, algorithm, hom, k == 0, params, filename, dataframe)
+                file.write(f'{x},{metrics["Score"]},{metrics["Time"]},{str(metrics["Param"])}\n')
+
+            file.close()
+            compute_mean_and_std(dataframe, filename)
+        i += 1
+
+    j = 0
+
+    while j < len(regression_algorithms):
+        algorithm = regression_algorithms[j]
         params = regression_hyperparams[algorithm.__name__]
         for k in range(len(hyperopt_methods)):
             hom = hyperopt_methods[k]
             dataframe = DataFrame()
             filename = f"experiments/results/{algorithm.__name__}_{hom.__name__}_diamond.csv"
-            for _ in range(5):
-                dataframe = run(data, algorithm, hom, k == 0, params, filename, dataframe)
+            file = open(filename, 'a')
 
+            for x in range(5):
+                dataframe, metrics = run(data_diamond, algorithm, hom, k == 0, params, filename, dataframe)
+                file.write(f'{x},{metrics["Score"]},{metrics["Time"]},{str(metrics["Param"])}\n')
+
+            file.close()
             compute_mean_and_std(dataframe, filename)
+        j += 1

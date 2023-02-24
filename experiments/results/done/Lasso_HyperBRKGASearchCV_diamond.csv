@@ -1,0 +1,8 @@
+,Score,Time,Param
+0,0.9069116717687578,62273.202822,"{'alpha': 0.14501554956588966, 'fit_intercept': 1, 'selection': 'random'}"
+1,0.9069094282099742,44345.834773,"{'alpha': 0.18069704778568874, 'fit_intercept': 1, 'selection': 'random'}"
+2,0.9069237797556277,36243.524955,"{'alpha': 0.1489228385035046, 'fit_intercept': 1, 'selection': 'random'}"
+3,0.9069004619786121,52623.897054,"{'alpha': 0.11362048049024172, 'fit_intercept': 1, 'selection': 'random'}"
+4,0.9069079627100509,40227.230128,"{'alpha': 0.067525237227673, 'fit_intercept': 1, 'selection': 'random'}"
+5,Média: 0.9069106608846045,Média: 47142.7379464,
+6,Desvio Padrão: 8.45493908614442e-06,,

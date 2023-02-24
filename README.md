@@ -1,4 +1,9 @@
-Para rodar esse código é necessário antes seguir este passo a passo:
+# HyperBKRGA
+
+
+## Ambiente de desenvolvimento
+
+Para executar qualquer código nesse repositório é necessário antes seguir este passo a passo:
 
 - Criar um venv e ativá-lo:
 ```bash
@@ -10,8 +15,15 @@ $ venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
-Em seguida é possível rodar o exemplo da seguinte forma:
+## Exemplo básico
+
+Com o ambiente preparado é possível rodar o exemplo mais básico da seguinte forma:
 
 ```bash
 $ py ./adaptee.py
 ```
+
+## Experimentos
+
+Para reproduzir os experimentos realizados no trabalho rode o arquivo ``main.py``. 
+Note que é um programa que toma muito tempo de execução. 

@@ -1,0 +1,8 @@
+0,0.9760372440593595,7395.934572696686,"{'criterion': 'squared_error', 'max_depth': 12, 'min_samples_leaf': 4, 'min_samples_split': 12, 'splitter': 'best'}"
+1,0.976021388798678,7197.038761377335,"{'criterion': 'friedman_mse', 'max_depth': 12, 'min_samples_leaf': 4, 'min_samples_split': 16, 'splitter': 'best'}"
+2,0.9760213633164738,7191.741384744643,"{'criterion': 'friedman_mse', 'max_depth': 12, 'min_samples_leaf': 4, 'min_samples_split': 12, 'splitter': 'best'}"
+3,0.9760095602065949,7315.16677236557,"{'criterion': 'squared_error', 'max_depth': 12, 'min_samples_leaf': 4, 'min_samples_split': 16, 'splitter': 'best'}"
+4,0.9760208941801455,7198.841158151627,"{'criterion': 'squared_error', 'max_depth': 12, 'min_samples_leaf': 4, 'min_samples_split': 16, 'splitter': 'best'}"
+,Score,Time,Param
+0,Média: 0.9760220901122503,Média: 7259.744529867172,
+1,Desvio Padrão: 9.86269455004088e-06,,
