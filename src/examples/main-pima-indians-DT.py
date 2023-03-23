@@ -5,7 +5,7 @@ from sklearn.model_selection._search import BaseSearchCV
 from sklearn.tree import DecisionTreeClassifier
 import warnings
 from sklearn.preprocessing import StandardScaler
-from adaptee import HyperBRKGASearchCV
+from ..adaptee import HyperBRKGASearchCV
 
 warnings.filterwarnings('ignore')
 
