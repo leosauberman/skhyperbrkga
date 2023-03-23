@@ -5,13 +5,13 @@ import seaborn as sns
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, train_test_split
 from sklearn.model_selection._search import BaseSearchCV
 from sklearn.neighbors import KNeighborsClassifier
-
-sns.set()
+from sklearn.preprocessing import StandardScaler
+from ..adaptee import HyperBRKGASearchCV
 import warnings
 
+sns.set()
+
 warnings.filterwarnings('ignore')
-from sklearn.preprocessing import StandardScaler
-from adaptee import HyperBRKGASearchCV
 
 if __name__ == "__main__":
     diabetes_data = pd.read_csv('./hbrkga/datasets/diabetes.csv')
