@@ -1,4 +1,5 @@
 import copy
+import os
 import random
 from datetime import datetime
 
@@ -73,6 +74,7 @@ class HyperBRKGASearchCV(BaseSearchCV):
     def __init__(
             self,
             estimator,
+            brkga_params=None,
             *,
             scoring=None,
             n_jobs=None,
@@ -97,7 +99,11 @@ class HyperBRKGASearchCV(BaseSearchCV):
             error_score=error_score,
             return_train_score=return_train_score,
         )
-        self.brkga_config, _ = load_configuration("./hbrkga/config.conf")
+        if brkga_params is not None:
+            self.brkga_config, _ = brkga_params
+        else:
+            self.brkga_config, _ = load_configuration("../../hbrkga/config.conf")
+
         self._parameters = parameters
 
         self.decoder = Decoder(self._parameters, estimator, data, target, cv)

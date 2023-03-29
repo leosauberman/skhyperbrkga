@@ -26,6 +26,8 @@ from itertools import chain
 from hbrkga.brkga_mp_ipr.types import BrkgaParams, ExternalControlParams
 from hbrkga.brkga_mp_ipr.exceptions import LoadError
 
+import os
+
 ###############################################################################
 
 def load_configuration(configuration_file: str) -> \
@@ -105,6 +107,50 @@ def load_configuration(configuration_file: str) -> \
     return (brkga_params, control_params)
 
 ###############################################################################
+
+def load_configuration_from_dict(config_dict: dict) -> (BrkgaParams, ExternalControlParams):
+    """
+        Loads the parameters from a configuration dict returning them as a tuple.
+
+        Args:
+            config_dict (dict): dict containing the parameters and its values.
+
+        Returns:
+            A tuple containing a `BrkgaParams` and a `ExternalControlParams` object.
+
+        Raises:
+            ValueError: when trying to set a wrong param value
+
+            LoadError: In cases of missing data or bad-formatted data.
+    """
+
+    brkga_params = BrkgaParams()
+    control_params = ExternalControlParams()
+
+    param_names_types = {
+        name: type(value)
+        for name, value in chain(vars(brkga_params).items(),
+                                 vars(control_params).items())
+    }
+
+    param_given = {name: False for name in param_names_types.keys()}
+
+    for (param_name, value) in config_dict.items():
+        if param_name in vars(brkga_params):
+            data = brkga_params
+        elif param_name in vars(control_params):
+            data = control_params
+        else:
+            raise LoadError(f"parameter '{param_name}' unknown")
+
+        try:
+            setattr(data, param_name, param_names_types[param_name](value))
+            param_given[param_name] = True
+        except ValueError:
+            raise LoadError(f"invalid value for '{param_name}': {value}")
+    # end for
+
+    return (brkga_params, control_params)
 
 def write_configuration(filename: str, brkga_params: BrkgaParams,
                         external_params: ExternalControlParams) -> None:
