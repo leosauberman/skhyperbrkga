@@ -21,6 +21,20 @@ from hbrkga.exploitation_method_BO_only_elites import BayesianOptimizerElites
 
 
 class Decoder:
+    """
+    A classe Decoder é responsável por fazer a conversão dos parâmetros em indivíduos do algoritmo genético e 
+    também por convertê-los de volta.
+    Parameters
+    ----------
+    parameters: <<DIZER QUAIS SÃO OS TIPOS ACEITOS>>
+    <<DEFINIR O QUE É ESSE PARÂMETRO (EXEMPLO ABAIXO)>>
+    The parameter grid to explore, as a dictionary mapping estimator
+    parameters to sequences of allowed values.
+    An empty dict signifies default parameters.
+    A sequence of dicts signifies a sequence of grids to search, and is
+    useful to avoid exploring parameter combinations that make no sense
+    or have no effect. See the examples below.
+    """
 
     def __init__(self, parameters, estimator, X, y, cv):
         self._parameters = parameters
@@ -31,6 +45,25 @@ class Decoder:
         self._cv = cv
 
     def decode(self, chromosome: BaseChromosome, rewrite: bool) -> float:
+        """
+        Definição da decodificação, o qual usa como parâmetro o cromossomo base  variável cromossomo e a variável booleana de escrita. 
+        O método retorna o resultado da função de avaliação para um dado cromossomo.
+        
+        Parameters
+        
+        ----------
+        chromosome: BaseChromosome
+        <<DFINIR O QUE É ESSE PARÂMETRO>>
+        
+        rewrite:bool
+        <<DEFINIR O QUE É ESSE PARÂMETRO>>
+        
+        Returns
+        
+        -------
+        score:float
+        resultado da função de avaliação para o cromossomo
+        """
         return self.score(self.encoder(chromosome))
 
     def encoder(self, chromosome: BaseChromosome) -> dict:
